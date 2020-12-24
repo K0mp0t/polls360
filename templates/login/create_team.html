@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Teams {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container margin-class">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-main">Создание команды</h3>
+            <form method="post" autocomplete="off">    
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="poll-field-wrapper margin-class text-center">
+                        <div style="padding: 0">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <input class="button-main margin-class" type="submit" value="Создать">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

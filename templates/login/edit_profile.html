@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit {{ user.username }}'s Profile {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row margin-class">
+        {{ form.non_field_errors}}
+        <div class="col-8">
+            <form method="post" class="edit-form" enctype='multipart/form-data'>{% csrf_token %}
+                {% for field in form %}
+                    {% if field.name == 'profile_image' %}
+                    <div id="image-field-wrapper" class="poll-field-wrapper text-main margin-class">
+                    {% else %}
+                    <div class="poll-field-wrapper text-main margin-class">
+                    {% endif %}
+                        {{ field.label_tag }} <br>
+                        {{ field.errors }}
+                        <div>
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="text-center margin-class">
+                    <input class="button-main" type="submit" value="Сохранить">
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+            <div class="img-container">
+                {% if user.profile.profile_image %}
+                <img class="profile-image-shifted" src="{{ user.profile.profile_image.url }}">
+                {% else %}
+                <img class="profile-image-shifted" src="{% static 'img/profilePlaceholder.jpg' %}">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

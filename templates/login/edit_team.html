@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit {{ team.name }} {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row margin-class">
+        <form method="post"> {% csrf_token %}
+            <ul style="padding: 0">
+            {% for field in form %}
+                <li style="list-style: none" class="margin-class">
+                    {{ field.label }}
+                    {{ field }}
+                </li>
+            {% endfor %}
+            </ul>
+            <input type="submit">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

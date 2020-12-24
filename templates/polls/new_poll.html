@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} Создать новый опрос {% endblock %}
+
+{% block content %}
+{% load static %}
+{% if user.is_authenticated and user.is_staff %}
+<div class="container margin-class">
+    <script src="{% static 'js/new_poll_scripts.js' %}"></script>
+    <h3 class="text-main">Новый опрос</h3>
+    <form method="post" id="questions" autocomplete="off"> 
+        {% csrf_token %}
+        <div class="poll-field-wrapper">
+            <div class="text-second-org" style="text-align: center; padding: 0">
+                {{ form.pollName }}
+            </div>
+            <div class="row">
+                <div class="col-3 margin-class text-second-org">
+                    <div>
+                        {{ form.team.label_tag }}
+                    </div>
+                    <div>
+                        {{ form.user.label_tag }}
+                    </div>
+                </div>
+                <div class="col-9 margin-class text-second-org">
+                    <div>
+                        {{ form.team }}
+                    </div>
+                    <div style="margin-top: 1.75%">
+                        {{ form.user }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="poll-field-wrapper margin-class" id="question1">
+            <div>
+                <img id="vip-icon" style="width: 4%" src="{% static 'img/question.svg' %}">
+                <label class="text-second-org" for="id_question1">Вопрос #1:</label>
+                <input type="text" name="question1" required id="id_question1">
+                <br>
+                <label class="text-second-org" for="id_question1_type">Тип вопроса #1:</label>
+                <select name="question1_type" class="std-select text-second-org" required id="id_question1_type">
+                    <option class="std-option" value="st">Small text</option>
+                    <option class="std-option" value="r">Radio</option>
+                    <option class="std-option" value="c">Checkbox</option>
+                </select>
+            </div>
+            <ul id="answers1" style="list-style: none">
+                <div id="answer1_1" class="text-second poll-field-wrapper">
+                    <li>
+                        <label for="id_answer1_1">Answer #1:</label>
+                        <input type="text" name="answer1_1" required id="id_answer1_1">
+                    </li>
+                </div>
+                <div id="answer1_2" class="text-second poll-field-wrapper">
+                    <li>
+                        <label for="id_answer1_2">Answer #2:</label>
+                        <input type="text" name="answer1_2" required id="id_answer1_2">
+                        <a style="display: inline-block" class="text-second" onclick="return deletePossibleAnswer(this, 1, 2)" id="delete1" href="#">X</a>
+                    </li>
+                </div>
+                <a href="#" class="text-second-org icon std-link" style="text-align: left" id="add_answer_ref1" onclick="return addPossibleAnswer(1)">
+                    +
+                </a>
+            </ul>
+        </div>
+        <a href="#" class="std-link text-second-org" id="add_field_ref" onclick="return addQuestionField()">Добавить вопрос</a>
+        <input type="submit" class="button-main" id="submit_btn" value="Сохранить">
+    </form>
+</div>
+{% else %}
+<div class="container text-center">
+    <img class="img-not-logged" src="{% static 'img/StaffOnly.svg' %}"><br>
+</div>
+{% endif %}
+{% endblock %}

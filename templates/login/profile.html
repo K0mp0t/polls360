@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }}'s Profile {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row margin-class">
+        <div class="col-3">
+            <div class="img-container">
+                {% if user.profile.profile_image %}
+                    <img class="profile-image-shifted" src="{{ user.profile.profile_image.url }}">
+                {% else %}
+                    <img class="profile-image-shifted" src="{% static 'img/profilePlaceholder.jpg' %}">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-9 info-container">
+            <div class="text-main">
+                <a class="std-icon" href="{% url 'edit_profile' %}">
+                    <img src="{% static 'img/edit.svg' %}">
+                </a>
+                <span>Логин: </span>
+                <span>{{ user.username }}</span>
+                {% if user.is_staff %}
+                <span class="staff-icon">Staff</span>
+                {% endif %}
+                {% if user.is_active %}
+                <span class="active-icon">Active</span>
+                {% endif %}
+                <br>
+                {% if user.email %}
+                    <span>Email: </span>
+                    <span>{{ user.email }}</span><br>
+                {% endif %}
+                {% if user.first_name %}
+                    <span>Полное имя: </span>
+                    <span>{{ user.get_full_name }}</span><br>
+                {% endif %}
+                <span>Команда: </span>
+                <span>{{ user.profile.team }}</span><br>
+                <span>Роль в команде: </span>
+                <span>{{ user.profile.position }}</span><br>
+                <span>Дата регистрации: </span>
+                <span>{{ user.date_joined }}</span><br>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

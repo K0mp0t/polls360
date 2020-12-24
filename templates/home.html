@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row align-items-center margin-class">
+        {% if user.is_authenticated %}
+        <div class="col-12">
+            <img class="green-poll" src="{% static 'img/polls.svg' %}">
+            <div class="polls-description">
+                <p>Анкетирование – это один из методов обратной связи с сотрудниками компании</p>
+                <p>Данный анонимный опрос поможет оценить обстановку в команде и работу каждого сотрудника</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center std-link">
+            <img class="img-not-logged" src="{% static 'img/URNotLoggedIn.svg' %}"><br>
+            <a class="text-reg" href="{% url 'login' %}">Log In</a>{% endif %}
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="row align-items-center margin-class std-image">
+            <div class="col std-link">
+                <a class="text-main std-link" href="{% url 'teams' %}">
+                    <img class="icon" src="{% static 'img/team.svg' %}"><br>
+                    Команды
+                </a>
+            </div>
+            <div class="col std-link">
+                <a class="text-main std-link" href="{% url 'polls' %}">
+                    <img class="icon" src="{% static 'img/avaliable_polls.svg' %}"><br>
+                    Доступные опросы
+                </a>
+            </div>
+            <div class="col std-link">
+                <a class="text-main std-link" href="{% url 'new_poll' %}">
+                    <img class="icon" src="{% static 'img/poll_icon.svg' %}"><br>
+                    Создать новый опрос
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

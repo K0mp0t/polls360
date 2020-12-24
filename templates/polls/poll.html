@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Опрос #{{ poll.id }} {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <h3 class="text-main margin-class">{{ poll.name }}</h3>
+    {% if poll.team %}
+        <h3 class="text-main text-org">{{ poll.team.name }}</h3>
+    {% endif %}
+    <div class="row">
+        <div class="col-2">
+            <img class="std-image align-bottom" src="{% static 'img/triangles1.svg' %}">
+        </div>
+        <div class="col-8">
+            {{ poll_form.non_field_errors }}
+            <form method="post"> {% csrf_token %}
+                {% for field in poll_form %}
+                <div class="poll-field-wrapper margin-class">
+                    <img class="question-img" src="{% static 'img/question.svg' %}">
+                    <span>{{ field.name }}</span>
+                    <br>
+                    {{ field.errors }}
+                    <div>
+                        {{ field }}
+                    </div>
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="text-center">
+                    <input class="button-main" type="submit" value="Отправить">
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+            <img src="{% static 'img/triangles2.svg' %}">
+        </div>
+    </div>
+</div>
+{% endblock %}

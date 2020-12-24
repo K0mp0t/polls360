@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Опросы для {{ user.username }} {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container margin-class">
+    <h3 class="text-main">Опросы для {{ user.username }} </h3>
+    <div class="row text-center">
+        <div class="col-8">
+            <ul class="rounded">
+                {% for poll in user_polls %}
+                    <div class="row align-items-center">
+                        <div class="col-11">
+                            <li class="text-main std-link">
+                                <a class="std-link" href="{% url 'poll' poll.id %}">
+                                    <span class="text-main">{{ poll.name }}</span>
+                                    {% if poll.team.name %}
+                                    - <span class="text-org"> {{ poll.team.name }} </span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                        </div>
+                        {% if user.is_staff %}
+                            <div class="col-1 delete-link-container">
+                                <a href="{% url 'delete_poll' poll.id %}" class="delete-link">
+                                    <img class="delete-poll" src="{% static 'img/green_cross.svg' %}">
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-4 std-link">
+            <a class="text-main std-link" href="{% url 'new_poll' %}">
+                <img style="margin-bottom: 3%" class="icon" src="{% static 'img/polls.svg' %}">
+                <span>Создать опрос</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

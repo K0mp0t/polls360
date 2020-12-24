@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Cheater! {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container text-center margin-class">
+    <img src="{% static 'img/cheat.svg' %}">
+    <span class="text-main margin-class">Так нельзя, {{ user.username }}!</span>
+    <span class="text-main">Схитрить не получится :)</span>
+    <span class="text-main">Результат не был сохранен</span>
+</div>
+{% endblock %}

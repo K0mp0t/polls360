@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Log In Page {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-7">
+            <img src="{% static 'img/auth_hex.svg' %}" class="auth_hex">
+        </div>
+        <div class="col-5">
+            <div class="login-form">
+                <h2 class="login-text text-center">Авторизация</h2>
+                <form method = "post" autocomplete="off">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="field-wrapper">
+                        <span>{{ field.name }}</span>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="button-dark">Вход</button>
+                </form>
+            </div>
+            <div class="registration std-link">
+                <a href="{% url 'signup' %}" class="text-main text-block">Регистрация</a>
+            </div>
+            {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

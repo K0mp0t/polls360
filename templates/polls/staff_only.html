@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} Staff only {% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container text-center">
+    <img class="img-not-logged" src="{% static 'img/StaffOnly.svg' %}"><br>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Teams {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container margin-class">
+    <h3>{{ user.username }}, вы уже состоите в команде {{ user.profile.team.name }}</h3>
+</div>
+
+{% endblock %}

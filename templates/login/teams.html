@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Teams {% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="row margin-class">
+        <div class="{% if user.is_staff and not user.profile.team %} col-10 {% else %} col-12 {% endif %}">
+            <h3 class="text-main">Доступные команды:</h3>
+            <ul class="rounded">
+                {% for team in available_teams %}
+                <li style="list-style: none">
+                    <a class="text-second" href="{% url 'team_info' team.id %}">{{ team.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% if user.is_staff %}
+        <div class="col-2 margin-class">
+            <a class="std-link text-main" href="{% url 'create_team' %}">
+                <img src="{% static 'img/green_team.svg' %}" class="std-image icon">
+                Создать команду
+            </a>
+            <img class="std-image big-margin-class" src="{% static 'img/hex2.svg' %}">
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
