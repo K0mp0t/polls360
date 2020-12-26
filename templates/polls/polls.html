@@ -14,9 +14,11 @@
                         <div class="col-11">
                             <li class="text-main std-link">
                                 <a class="std-link" href="{% url 'poll' poll.id %}">
-                                    <span class="text-main">{{ poll.name }}</span>
+                                    <span class="text-main">{{ poll.name }} - </span>
                                     {% if poll.team.name %}
-                                    - <span class="text-org"> {{ poll.team.name }} </span>
+                                    <span class="text-org"> {{ poll.team.name }} </span>
+                                    {% else %}
+                                    <span class="text-org"> All Teams </span>
                                     {% endif %}
                                 </a>
                             </li>

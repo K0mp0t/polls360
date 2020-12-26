@@ -32,33 +32,33 @@
             {% if team == user.profile.team %}
                 <div class="margin-class">
                     <a class="margin-class text-second-org std-link" style="text-align: left" href="{% url 'leave_team' %}" >
-                        <img class="lil-icon icon" src="{% static 'img/exit.svg' %}">
+                        <img class="lil-icon col-icon" src="{% static 'img/exit.svg' %}">
                         <span>Покинуть команду</span>
                     </a>
                 </div>
                 <div class="margin-class">
                     <a class="margin-class text-second-org std-link" style="text-align: left" href="{% url 'edit_team' team.id %}" >
-                        <img class="lil-icon icon" src="{% static 'img/edit.svg' %}">
+                        <img class="lil-icon col-icon" src="{% static 'img/edit.svg' %}">
                         <span>Редактировать команду</span>
                     </a>
                 </div>
                 <div class="margin-class">
                     <a class="margin-class text-second-org std-link" style="text-align: left" href="{% url 'delete_team' team.id %}" >
-                        <img class="lil-icon icon" src="{% static 'img/delete_icon.svg' %}">
+                        <img class="lil-icon col-icon" src="{% static 'img/delete_icon.svg' %}">
                         <span>Удалить команду</span>
                     </a>
                 </div>
             {% elif not user.profile.team %}
                 <div class="margin-class">
                     <a class="margin-class text-second-org std-link" style="text-align: left" href="{% url 'join_team' team.id %}">
-                        <img class="lil-icon icon" src="{% static 'img/join_team.svg' %}">
+                        <img class="lil-icon col-icon" src="{% static 'img/join_team.svg' %}">
                         Присоединиться к команде
                     </a>
                 </div>
             {% else %}
                 <div class="margin-class" style="text-align: left">
                     <a class="margin-class text-second-org std-link" style="text-align: left" href="{% url 'team_info' user.profile.team.id %}">
-                        <img class="lil-icon icon" src="{% static 'img/home.svg' %}">
+                        <img class="lil-icon col-icon" src="{% static 'img/home.svg' %}">
                         К моей команде
                     </a>
                 </div>

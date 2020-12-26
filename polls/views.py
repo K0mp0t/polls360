@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http.response import HttpResponseRedirect, HttpResponse
 from .models import *
+from login.models import Team
 from .forms import *
 from django.db.models import Q
 
@@ -41,7 +42,11 @@ def new_poll(request):
             return render(request, 'polls/staff_only.html', locals())
         form = NewPollForm(request.POST or None)
         if request.POST:
-            n_poll = Poll.objects.create(user=User.objects.get(username=form.data['user']), name=form.data['pollName'])
+            if int(form.data['team']) != -1:
+                team = Team.objects.get(id=int(form.data['team']))
+                n_poll = Poll.objects.create(user=User.objects.get(username=form.data['user']), name=form.data['pollName'], team=team)
+            else:
+                n_poll = Poll.objects.create(user=User.objects.get(username=form.data['user']), name=form.data['pollName'])
             question_index = 1
             answer_index = 1
             q = 'question'+str(question_index)
@@ -57,6 +62,7 @@ def new_poll(request):
                     answer = 'answer'+str(question_index)+'_'+str(answer_index)
                 question_index += 1
                 q = 'question'+str(question_index)
+            return HttpResponseRedirect(reverse('polls'))
         return render(request, 'polls/new_poll.html', locals())
     else:
         return HttpResponseRedirect(reverse_lazy('login'))

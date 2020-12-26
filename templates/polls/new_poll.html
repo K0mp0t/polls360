@@ -7,6 +7,8 @@
 {% if user.is_authenticated and user.is_staff %}
 <div class="container margin-class">
     <script src="{% static 'js/new_poll_scripts.js' %}"></script>
+    <img src="{% static 'img/cross-g.svg' %}" id="vip-icon2" style="position: absolute" hidden class="std-link">
+    <img src="{% static 'img/plus-g.svg' %}" id="vip-icon3" style="position: absolute" hidden class="std-link">
     <h3 class="text-main">Новый опрос</h3>
     <form method="post" id="questions" autocomplete="off"> 
         {% csrf_token %}
@@ -35,7 +37,7 @@
         </div>
         <div class="poll-field-wrapper margin-class" id="question1">
             <div>
-                <img id="vip-icon" style="width: 4%" src="{% static 'img/question.svg' %}">
+                <img id="vip-icon1" style="width: 4%" src="{% static 'img/question.svg' %}">
                 <label class="text-second-org" for="id_question1">Вопрос #1:</label>
                 <input type="text" name="question1" required id="id_question1">
                 <br>
@@ -57,11 +59,13 @@
                     <li>
                         <label for="id_answer1_2">Answer #2:</label>
                         <input type="text" name="answer1_2" required id="id_answer1_2">
-                        <a style="display: inline-block" class="text-second" onclick="return deletePossibleAnswer(this, 1, 2)" id="delete1" href="#">X</a>
+                        <a style="display: inline-block" class="text-second" onclick="return deletePossibleAnswer(this, 1, 2)" id="delete1" href="#">
+                            <img src="{% static 'img/cross-g.svg' %}" class="std-link">
+                        </a>
                     </li>
                 </div>
                 <a href="#" class="text-second-org icon std-link" style="text-align: left" id="add_answer_ref1" onclick="return addPossibleAnswer(1)">
-                    +
+                    <img src="{% static 'img/plus-g.svg' %}" class="std-link">
                 </a>
             </ul>
         </div>

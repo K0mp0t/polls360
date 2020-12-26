@@ -14,10 +14,11 @@ function addQuestionField() {
     const qNum = findLeastNum(qFields);
     qFields.set(qNum, new Set([1]));
     const divElement = document.createElement("div");
-    let path = document.getElementById("vip-icon").src;
+    let path1 = document.getElementById("vip-icon1").src;
+    let path3 = document.getElementById("vip-icon3").src;
     divElement.innerHTML = `
         <div>
-            <img style="width: 4%" src="${path}">
+            <img style="width: 4%" src="${path1}">
             <label class="text-second-org" for="id_question${qNum}">Вопрос #${qNum}</label>
             <input type="text" name="question${qNum}" required id="id_question${qNum}">
             <a id="q_delete${qNum}" class="text-second-org icon std-link" style="text-align: left; display: inline-block" onclick="return deleteField(this, ${qNum})" href="#">X</a>
@@ -37,7 +38,9 @@ function addQuestionField() {
                     <input type="text" name="answer${qNum}_1" required id="id_answer${qNum}_1">
                 </li>
             </div>
-            <a href="#" class="text-second-org icon std-link" style="text-align: left" id="add_answer_ref${qNum}" onclick="return addPossibleAnswer(${qNum})">[+]</a>
+            <a href="#" class="text-second-org icon std-link" style="text-align: left" id="add_answer_ref${qNum}" onclick="return addPossibleAnswer(${qNum})">
+                <img src="${path3}" class="std-link">
+            </a>
         </ul>`;
     divElement.id = "question"+qNum;
     divElement.classList.add("poll-field-wrapper");
@@ -76,6 +79,7 @@ function deletePossibleAnswer(field, qNum, aNum) {
     let contDiv = field.parentNode;
     contDiv.parentNode.removeChild(contDiv);
     let answers = qFields.get(qNum);
+    let path2 = document.getElementById("vip-icon2").src;
     answers.delete(aNum);
     qFields.set(qNum, answers);
     if (aNum !== 2) {
@@ -85,7 +89,7 @@ function deletePossibleAnswer(field, qNum, aNum) {
         let onclickValue = `return deletePossibleAnswer(this, ${qNum}, ${aNum - 1})`;
         deleteBtn.setAttribute("onclick", onclickValue);
         deleteBtn.id = "delete" + qNum;
-        deleteBtn.text = "X";
+        deleteBtn.innerHTML = `<img src="${path2}" class="std-link">`;
         deleteBtn.classList.add("text-second");
         deleteBtn.style.display = "inline-block";
         lastChild.parentNode.appendChild(deleteBtn);
@@ -99,11 +103,14 @@ function addPossibleAnswer(qNum) {
     answers.add(aNum);
     qFields.set(qNum, answers);
     let divElement = document.createElement("div");
+    let path2 = document.getElementById("vip-icon2").src;
     divElement.innerHTML = `
         <li>
             <label for="id_answer${qNum}_${aNum}">Answer #${aNum}:</label>
             <input type="text" name="answer${qNum}_${aNum}" required id="id_answer${qNum}_${aNum}">
-            <a style="display: inline-block" class="text-second" onclick="return deletePossibleAnswer(this, ${qNum}, ${aNum})" id="delete${qNum}" href="#">X</a>
+            <a style="display: inline-block" class="text-second" onclick="return deletePossibleAnswer(this, ${qNum}, ${aNum})" id="delete${qNum}" href="#">
+                <img src="${path2}" class="std-link">
+            </a>
         </li>`;
     divElement.id = "answer"+qNum+"_"+aNum;
     divElement.classList.add("text-second");

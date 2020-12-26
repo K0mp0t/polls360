@@ -21,5 +21,5 @@ class PollForm(forms.Form):
 class NewPollForm(forms.Form):
     user = forms.ChoiceField(label='Пользователь', widget=forms.Select(attrs={'class': 'std-select text-second-org'}), choices=[(user.username, user.username) for user in User.objects.all()])
     pollName = forms.CharField(label='Название опроса', max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Введите название'}))
-    team_choices = [(None, 'All teams')]+[(team.name, team.name) for team in Team.objects.all()]
+    team_choices = [(-1, 'All teams')]+[(team.id, team.name) for team in Team.objects.all()]
     team = forms.ChoiceField(label='Команда', widget=forms.Select(attrs={'class': 'std-select text-second-org'}), choices=team_choices)

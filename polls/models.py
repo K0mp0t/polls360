@@ -56,7 +56,8 @@ class PollResult(models.Model):
         return QuestionAnswerPair.objects.filter(poll_result=self).first().question.poll.name
     
     def get_team_name(self):
-        return QuestionAnswerPair.objects.filter(poll_result=self).first().question.poll.team.name
+        team = QuestionAnswerPair.objects.filter(poll_result=self).first().question.poll.team
+        return team.name if team is not None else 'All Teams'
     
     def get_username(self):
         return self.user.username

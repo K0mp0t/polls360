@@ -19,8 +19,10 @@ class EditTeamForm(forms.Form):
     def __init__(self, team=None, *args, **kwargs):
         super(EditTeamForm, self).__init__(*args, **kwargs)
         profiles = Profile.objects.filter(team=team)
-        self.fields['name'] = forms.CharField(label='Название команды', required=False, initial=team.name)
+        self.fields['name'] = forms.CharField(label='Название команды', required=False, initial=team.name, 
+                                              widget=forms.TextInput(attrs={'class': 'text-input-org text-second-org text-center'}))
         for profile in profiles:
             self.fields[str(profile.id)+'_position'] = forms.CharField(label='Роль '+profile.user.username,
-                                                                             required=False, initial=profile.position)
+                                                                             required=False, initial=profile.position, 
+                                                                       widget=forms.TextInput(attrs={'class': 'text-input-org text-second-org text-center'}))
     

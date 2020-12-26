@@ -65,6 +65,9 @@ class PollResultAdmin(admin.ModelAdmin):
         return obj.get_poll_name()
     
     def team_name(self, obj):
+        if obj is None:
+            return '-'
+        print(1)
         return obj.get_team_name()
     
     def username(self, obj):

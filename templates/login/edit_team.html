@@ -6,18 +6,30 @@
 {% load static %}
 
 <div class="container">
+    <div class="green-padding">
+        <h3 class="login-text text-center">Редактировать команду</h3>
+    </div>
     <div class="row margin-class">
-        <form method="post"> {% csrf_token %}
-            <ul style="padding: 0">
-            {% for field in form %}
-                <li style="list-style: none" class="margin-class">
-                    {{ field.label }}
-                    {{ field }}
-                </li>
-            {% endfor %}
-            </ul>
-            <input type="submit">
-        </form>
+        <div class="col-12">
+            <form method="post" class="edit-team-form"> {% csrf_token %}
+                <ul style="padding: 0">
+                {% for field in form %}
+                    <li style="list-style: none" class="lil-margin-class">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-4 text-third">
+                                {{ field.label }}
+                            </div>
+                            <div class="col-6">
+                                {{ field }}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                </ul>
+                <input type="submit" class="button-main" value="Сохранить">
+            </form>
+        </div>
     </div>
 </div>
 
